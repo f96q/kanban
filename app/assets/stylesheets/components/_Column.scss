@@ -1,0 +1,14 @@
+.Column {
+  float: left;
+  width: $column-width;
+
+  &-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: $font-size-x-small;
+  }
+
+  &-dropzone {
+    height: 50px;
+  }
+}
