@@ -22,8 +22,6 @@ const initialState = {
   },
   taskModal: {
     isOpen: false,
-    clientX: 0,
-    clientY: 0,
     columnId: null,
     task: {
       id: null,
@@ -49,8 +47,6 @@ export default function board(state = initialState, action) {
     case types.OPEN_NEW_TASK_MODAL: {
       const taskModal = {
         isOpen: true,
-        clientX: action.clientX,
-        clientY: action.clientY,
         columnId: action.columnId,
         task: {
           id: null,
@@ -75,8 +71,6 @@ export default function board(state = initialState, action) {
       const task = columns[columnIndex].tasks[index]
       const taskModal = {
         isOpen: true,
-        clientX: action.clientX,
-        clientY: action.clientY,
         columnId: action.columnId,
         task: Object.assign({}, task)
       }

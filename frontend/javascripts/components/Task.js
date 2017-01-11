@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 
 export default class Task extends Component {
-  edit(e) {
-    this.props.actions.openEditTaskModal(this.props.columnId, this.props.task.id, e.clientX, e.clientY)
-    e.stopPropagation()
+  edit() {
+    this.props.actions.openEditTaskModal(this.props.columnId, this.props.task.id)
   }
 
   onDragStart() {

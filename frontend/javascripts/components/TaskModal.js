@@ -36,14 +36,8 @@ export default class TaskModal extends Component {
 
   render() {
     const style = {
-      overlay: {
-        top: this.props.clientY,
-        left: this.props.clientX,
-        backgroundColor: 'transparent'
-      },
       content: {
-        marginTop: 0,
-        marginLeft: 0
+        marginTop: 65
       }
     }
     const destroyButton = () => {

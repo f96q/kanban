@@ -4,20 +4,16 @@ export function getBoard() {
   return { type: types.API_GET_BOARD }
 }
 
-export function openNewTaskModal(columnId, clientX, clientY) {
+export function openNewTaskModal(columnId) {
   return {
     type: types.OPEN_NEW_TASK_MODAL,
-    clientX: clientX,
-    clientY: clientY,
     columnId: columnId
   }
 }
 
-export function openEditTaskModal(columnId, id, clientX, clientY) {
+export function openEditTaskModal(columnId, id) {
   return {
     type: types.OPEN_EDIT_TASK_MODAL,
-    clientX: clientX,
-    clientY: clientY,
     columnId: columnId,
     id: id
   }

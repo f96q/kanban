@@ -15,8 +15,6 @@ class App extends Component {
         <Nav board={board} />
         <Board dragStartColumnId={dragStartColumnId} dragStartId={dragStartId} board={board} actions={actions} />
         <TaskModal isOpen={taskModal.isOpen}
-                    clientX={taskModal.clientX}
-                    clientY={taskModal.clientY}
                     columnId={taskModal.columnId}
                     task={taskModal.task}
                     actions={actions} />

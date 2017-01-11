@@ -3,8 +3,8 @@ import { findDOMNode } from 'react-dom'
 import Task from './Task'
 
 export default class Column extends Component {
-  addTask(e) {
-    this.props.actions.openNewTaskModal(this.props.column.id, e.clientX, e.clientY)
+  addTask() {
+    this.props.actions.openNewTaskModal(this.props.column.id)
   }
 
   onDragOver(e) {
