@@ -1,6 +1,6 @@
 .Column {
-  float: left;
   width: $column-width;
+  display: table-cell;
 
   &-title {
     text-align: center;
