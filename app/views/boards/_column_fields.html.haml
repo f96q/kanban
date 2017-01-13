@@ -1,0 +1,25 @@
+.card.nested-fields
+  .card-block
+    - if f.object.new_record?
+      .form-group.row
+        %label{class: 'col-sm-2 col-form-label'} Title
+        .col-sm-10
+          = f.text_field :title, class: 'form-control'
+      .form-group.row
+        %label.col-sm-2
+        .col-sm-10
+          .form-check
+            %label{class: 'form-check-label'}
+              = link_to_remove_association 'Remove', f
+    - else
+      .form-group.row
+        %label{class: 'col-sm-2 col-form-label'} Title
+        .col-sm-10
+          = f.text_field :title, class: 'form-control'
+      .form-group.row
+        %label.col-sm-2
+        .col-sm-10
+          .form-check
+            %label{class: 'form-check-label'}
+              = f.check_box :_destroy, class: 'form-check-input'
+              Remove
