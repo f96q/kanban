@@ -1,7 +1,30 @@
 .Task {
-  background-color: $color-green;
-  border: 1px solid $color-border-green;
   padding: 10px;
   margin: 10px 5px;
   font-size: $font-size-x-small;
+
+  &--green {
+    border: 1px solid $color-border-green;
+    background-color: $color-green;
+  }
+
+  &--yellow {
+    border: 1px solid $color-border-yellow;
+    background-color: $color-yellow;
+  }
+
+  &--blue {
+    border: 1px solid $color-border-blue;
+    background-color: $color-blue;
+  }
+
+  &--red {
+    border: 1px solid $color-border-red;
+    background-color: $color-red;
+  }
+
+  &--orange {
+    border: 1px solid $color-border-orange;
+    background-color: $color-orange;
+  }
 }

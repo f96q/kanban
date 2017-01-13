@@ -18,7 +18,8 @@ const initialState = {
   board: {
     id: null,
     title: '',
-    columns: []
+    columns: [],
+    color: 0
   },
   taskModal: {
     isOpen: false,
@@ -50,6 +51,7 @@ export default function board(state = initialState, action) {
         columnId: action.columnId,
         task: {
           id: null,
+          color: 0,
           title: '',
           description: ''
         }

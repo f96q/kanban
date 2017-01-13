@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228101243) do
+ActiveRecord::Schema.define(version: 20170113144219) do
 
   create_table "boards", force: :cascade do |t|
     t.string   "title",      null: false
@@ -27,12 +27,13 @@ ActiveRecord::Schema.define(version: 20161228101243) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "title",       null: false
+    t.string   "title",                   null: false
     t.text     "description"
     t.integer  "position"
-    t.integer  "column_id",   null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "column_id",               null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "color",       default: 0, null: false
     t.index ["column_id"], name: "index_tasks_on_column_id"
   end
 
