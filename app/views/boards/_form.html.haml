@@ -1,0 +1,15 @@
+.container
+  = form_for @board do |f|
+    = render 'alert'
+    = render 'error', object: f.object
+    .form-group.row
+      %label{class: 'col-sm-2 col-form-label'} Title
+      .col-sm-10
+        = f.text_field :title, class: 'form-control'
+    = f.fields_for :columns do |column|
+      = render 'column_fields', f: column
+    .links
+      = link_to_add_association '+', f, :columns, class: 'btn btn-primary'
+    .form-group.row
+      .offset-sm-2.col-sm-10
+        = f.submit 'save', class: 'btn btn-primary'
