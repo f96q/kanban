@@ -4,7 +4,7 @@ module.exports = {
   entry: './frontend/javascripts/application.js',
   output: {
     path: './app/assets/javascripts',
-    filename: 'application.js'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
