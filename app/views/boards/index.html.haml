@@ -1,0 +1,17 @@
+.container
+  %h3 Boards
+
+  %p= link_to '+', new_board_path, class: 'btn btn-primary'
+
+  %table.table
+    %thead
+      %tr
+        %th ID
+        %th Title
+        %th Updated At
+    %tbody
+      - @boards.each do |board|
+        %tr
+          %th{scope: 'row'}= board.id
+          %td= link_to board.title, board_path(board)
+          %td= board.updated_at

@@ -7,6 +7,17 @@ RSpec.describe BoardsController, type: :controller do
     sign_in(user)
   end
 
+  describe '#index' do
+    let(:board) { create(:board) }
+    let!(:user_board) { create(:user_board, user: user, board: board) }
+    let(:action) { process :index, method: :get }
+
+    it 'should success' do
+      action
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe '#create' do
     let(:params) do
       {

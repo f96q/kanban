@@ -1,6 +1,10 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:update, :edit]
 
+  def index
+    @boards = Board.includes(:user_boards).where(user_boards: {user_id: current_user.id}).order(updated_at: :desc)
+  end
+
   def new
     @board = Board.new
   end
