@@ -1,6 +1,6 @@
 class Board < ApplicationRecord
-  has_many :columns, inverse_of: :board
-  has_many :user_boards
+  has_many :columns, inverse_of: :board, dependent: :destroy
+  has_many :user_boards, dependent: :destroy
   has_many :users, through: :user_boards
   validates :title, presence: true
 
