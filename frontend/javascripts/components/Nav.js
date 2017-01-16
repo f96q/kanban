@@ -21,7 +21,7 @@ export default class Nav extends Component {
             <span className={`nav-link active ${dropdownToggle}`}>{this.props.board.title}</span>
             <div className="dropdown-menu">{boards}</div>
           </li>
-          <li className="nav-item">
+          <li className="nav-item float-sm-right">
             <a className="nav-link" href="/users/sign_out">LogOut</a>
           </li>
         </ul>
