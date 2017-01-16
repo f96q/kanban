@@ -20,3 +20,11 @@ export function getTaskModal(state) {
 export function getBoard(state) {
   return state.board.board
 }
+
+export function getBoards(state) {
+  return state.board.boards
+}
+
+export function getOpenDropDownNavi(state) {
+  return state.board.openDropDownNavi
+}

@@ -4,15 +4,15 @@ import { bindActionCreators } from 'redux'
 import Nav from '../components/Nav'
 import Board from '../components/Board'
 import TaskModal from '../components/TaskModal'
-import { getDragStartColumnId, getDragStartId, getTaskModal, getBoard } from '../reducers'
+import { getDragStartColumnId, getDragStartId, getTaskModal, getBoard, getBoards, getOpenDropDownNavi } from '../reducers'
 import * as BoardActions from '../actions'
 
 class App extends Component {
   render() {
-    const { dragStartColumnId, dragStartId, taskModal, board, actions } = this.props
+    const { dragStartColumnId, dragStartId, taskModal, board, boards, openDropDownNavi, actions } = this.props
     return (
       <div>
-        <Nav board={board} />
+        <Nav board={board} boards={boards} openDropDownNavi={openDropDownNavi} actions={actions} />
         <Board dragStartColumnId={dragStartColumnId} dragStartId={dragStartId} board={board} actions={actions} />
         <TaskModal isOpen={taskModal.isOpen}
                    columnId={taskModal.columnId}
@@ -29,6 +29,8 @@ function mapStateToProps(state) {
     dragStartId: getDragStartId(state),
     taskModal: getTaskModal(state),
     board: getBoard(state),
+    boards: getBoards(state),
+    openDropDownNavi: getOpenDropDownNavi(state),
     actions: state.actions
   }
 }

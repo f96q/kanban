@@ -77,3 +77,7 @@ export function dropTask(dragStartColumnId, id, columnId, index) {
     index: index
   }
 }
+
+export function toggleDropDownNavi() {
+  return { type: types.TOGGLE_DROP_DOWN_NAVI }
+}

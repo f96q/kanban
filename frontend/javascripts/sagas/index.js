@@ -8,7 +8,7 @@ const getCsrfToken = state => state.board.csrfToken
 function* getBoard(action) {
   const id = yield select(getBoardId)
   const json = yield call(api.getBoard, id)
-  yield put({ type: types.SET_BOARD, board: json })
+  yield put({ type: types.SET_BOARD, board: json.board, boards: json.boards })
 }
 
 function* createTask(action) {

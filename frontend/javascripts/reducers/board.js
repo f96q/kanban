@@ -15,12 +15,14 @@ const initialState = {
   dragStartColumnId: null,
   dragStartId: null,
   csrfToken: null,
+  openDropDownNavi: false,
   board: {
     id: null,
     title: '',
     columns: [],
     color: 0
   },
+  boards: [],
   taskModal: {
     isOpen: false,
     columnId: null,
@@ -43,7 +45,7 @@ export default function board(state = initialState, action) {
       return Object.assign({}, state, { board: board })
     }
     case types.SET_BOARD: {
-      return Object.assign({}, state, { board: action.board })
+      return Object.assign({}, state, { board: action.board, boards: action.boards })
     }
     case types.OPEN_NEW_TASK_MODAL: {
       const taskModal = {
@@ -124,6 +126,10 @@ export default function board(state = initialState, action) {
       tasks.splice(taskIndex, 1)
       dropTasks.splice(action.index, 0, task)
       return Object.assign({}, state, { board: board })
+    }
+    case types.TOGGLE_DROP_DOWN_NAVI: {
+      const openDropDownNavi = state.openDropDownNavi ? false : true
+      return Object.assign({}, state, { openDropDownNavi: openDropDownNavi })
     }
   }
   return state

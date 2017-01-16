@@ -16,6 +16,7 @@ export const API_CREATE_TASK = 'API_CREATE_TASK'
 export const API_UPDATE_TASK = 'API_UPDATE_TASK'
 export const API_DESTROY_TASK = 'API_DESTROY_TASK'
 export const API_DROP_TASK = 'API_DROP_TASK'
+export const TOGGLE_DROP_DOWN_NAVI = 'TOGGLE_DROP_DOWN_NAVI'
 export const TASK_COLORS = [
   { name: 'green', value: 0 },
   { name: 'yellow', value: 1 },
