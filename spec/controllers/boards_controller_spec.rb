@@ -68,4 +68,22 @@ RSpec.describe BoardsController, type: :controller do
       expect(board.columns[0].title).to eq('done')
     end
   end
+
+  describe '#destroy' do
+    let(:board) { create(:board) }
+    let!(:user_board) { create(:user_board, user: user, board: board) }
+    let(:params) do
+      {
+        id: board.id
+      }
+    end
+
+    let(:action) { process :destroy, method: :delete, params: params }
+
+    it 'should success' do
+      action
+      expect(response).to have_http_status(302)
+      expect { board.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end

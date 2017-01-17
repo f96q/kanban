@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:update, :edit]
+  before_action :set_board, only: [:update, :edit, :destroy]
 
   def index
     @boards = Board.includes(:user_boards).where(user_boards: {user_id: current_user.id}).order(updated_at: :desc)
@@ -31,6 +31,11 @@ class BoardsController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    @board.destroy
+    redirect_to boards_path
   end
 
   def set_board
