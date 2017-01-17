@@ -9,9 +9,13 @@
         %th ID
         %th Title
         %th Updated At
+        %th
     %tbody
       - @boards.each do |board|
         %tr
           %th{scope: 'row'}= board.id
           %td= link_to board.title, board_path(board)
           %td= board.updated_at
+          %td
+            = link_to 'Edit', edit_board_path(board)
+            = link_to 'Destroy', board_path(board), method: :delete, data: { confirm: 'Are you sure ?' }
