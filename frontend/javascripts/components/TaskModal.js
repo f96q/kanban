@@ -59,6 +59,7 @@ export default class TaskModal extends Component {
             <button type="button" className="close" onClick={::this.close}>
               <span>&times;</span>
             </button>
+            <h5 className="modal-title">{this.props.title}</h5>
           </div>
           <div className="modal-body">
             <div className="form-group">

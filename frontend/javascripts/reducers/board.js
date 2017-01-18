@@ -24,6 +24,7 @@ const initialState = {
   },
   boards: [],
   taskModal: {
+    title: '',
     isOpen: false,
     columnId: null,
     task: {
@@ -48,7 +49,10 @@ export default function board(state = initialState, action) {
       return Object.assign({}, state, { board: action.board, boards: action.boards })
     }
     case types.OPEN_NEW_TASK_MODAL: {
+      const index = findIndex(state.board.columns, action.columnId)
+      const title = state.board.columns[index].title
       const taskModal = {
+        title: title,
         isOpen: true,
         columnId: action.columnId,
         task: {
@@ -73,7 +77,9 @@ export default function board(state = initialState, action) {
       const columnIndex = findIndex(columns, action.columnId)
       const index = findIndex(columns[columnIndex].tasks, action.id)
       const task = columns[columnIndex].tasks[index]
+      const title = columns[columnIndex].title
       const taskModal = {
+        title: title,
         isOpen: true,
         columnId: action.columnId,
         task: Object.assign({}, task)
