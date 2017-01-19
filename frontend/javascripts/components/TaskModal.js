@@ -35,8 +35,8 @@ export default class TaskModal extends Component {
       title: this.props.task.title,
       description: this.props.task.description,
       color: this.props.task.color,
-      estimatedPomodoro: this.props.task.estimatedPomodoro,
-      pomodoro: this.props.task.pomodoro
+      estimatedPomodoro: parseInt(this.props.task.estimatedPomodoro),
+      pomodoro: parseInt(this.props.task.pomodoro)
     }
     if (this.props.task.id) {
       this.props.actions.updateTask(this.props.columnId, this.props.task.id, task)

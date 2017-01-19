@@ -28,6 +28,21 @@ export default class Column extends Component {
     this.props.actions.dropTask(this.props.dragStartColumnId, this.props.dragStartId, this.props.column.id, index)
   }
 
+  time(pomodoro) {
+    const rest = parseInt(pomodoro / 4) * 10  + pomodoro * 5
+    const hour = parseInt(((pomodoro * 25) + rest) / 60)
+    const min = ((pomodoro * 25) + rest) - 60 * hour
+    if (min == 0) {
+      return `${hour}h`
+    }
+    return `${hour}h${min}m`
+  }
+
+  title() {
+    const pomodoro = `${this.props.column.pomodoro}/${this.props.column.estimatedPomodoro}`
+    return `${this.props.column.title} (${pomodoro})`
+  }
+
   render() {
     const tasks = this.props.column.tasks.map((task) => {
       return (
@@ -37,7 +52,8 @@ export default class Column extends Component {
     tasks.push((<div className="Column-dropzone" key={`dropzone-${this.props.column.id}`}></div>))
     return (
       <div className="Column">
-        <div className="Column-title" onClick={::this.addTask}>{this.props.column.title}</div>
+        <div className="Column-title" onClick={::this.addTask}>{this.title()}</div>
+        <div className="Column-time">{this.time(this.props.column.pomodoro)}/{this.time(this.props.column.estimatedPomodoro)}</div>
         <div className="Column-tasks" onDragOver={::this.onDragOver} onDrop={::this.onDrop}>{tasks}</div>
       </div>
     )

@@ -2,7 +2,7 @@
   width: $column-width;
   display: table-cell;
 
-  &-title {
+  &-title, &-time {
     text-align: center;
     font-weight: bold;
     font-size: $font-size-x-small;
