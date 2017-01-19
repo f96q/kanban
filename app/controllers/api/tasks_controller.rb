@@ -46,6 +46,6 @@ class Api::TasksController < Api::ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :color)
+    params.require(:task).permit(:title, :description, :color, :estimated_pomodoro, :pomodoro)
   end
 end

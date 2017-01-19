@@ -1,3 +1,4 @@
+import humps from 'humps'
 import { call, put, select, takeEvery } from 'redux-saga/effects'
 import * as types from '../constants/ActionTypes'
 import * as api from '../api'
@@ -13,13 +14,13 @@ function* getBoard(action) {
 
 function* createTask(action) {
   const csrfToken = yield select(getCsrfToken)
-  const json = yield call(api.createTask, csrfToken, action.columnId, action.task)
+  const json = yield call(api.createTask, csrfToken, action.columnId, humps.decamelizeKeys(action.task))
   yield put({ type: types.CREATE_TASK, columnId: action.columnId, id: json.id, task: action.task })
 }
 
 function* updateTask(action) {
   const csrfToken = yield select(getCsrfToken)
-  yield call(api.updateTask, csrfToken, action.columnId, action.id, action.task)
+  yield call(api.updateTask, csrfToken, action.columnId, action.id, humps.decamelizeKeys(action.task))
   yield put({ type: types.UPDATE_TASK, columnId: action.columnId, id: action.id, task: action.task })
 }
 

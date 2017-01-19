@@ -20,7 +20,9 @@ const initialState = {
     id: null,
     title: '',
     columns: [],
-    color: 0
+    color: 0,
+    estimatedPomodoro: 0,
+    pomodoro: 0
   },
   boards: [],
   taskModal: {
@@ -59,7 +61,9 @@ export default function board(state = initialState, action) {
           id: null,
           color: 0,
           title: '',
-          description: ''
+          description: '',
+          estimatedPomodoro: 0,
+          pomodoro: 0
         }
       }
       return Object.assign({}, state, { taskModal: taskModal })

@@ -30,6 +30,7 @@
     "react-modal": "^1.4.0",
     "redux": "^3.5.2",
     "redux-saga": "^0.14.1",
-    "whatwg-fetch": "^2.0.1"
+    "whatwg-fetch": "^2.0.1",
+    "humps": "^2.0.0"
   }
 }
