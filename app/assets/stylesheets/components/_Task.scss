@@ -27,4 +27,8 @@
     border: 1px solid $color-border-orange;
     background-color: $color-orange;
   }
+
+  &--completion {
+    opacity: 0.5;
+  }
 }
