@@ -1,8 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from "redux-saga"
+import persistState from 'redux-localstorage'
 import reducer from './reducers'
 import rootSaga from './sagas'
 import App from './containers/App'
@@ -12,10 +13,13 @@ const csrfToken = document.getElementsByName('csrf-token').item(0).content
 const board = document.getElementsByClassName('js-board')[0]
 const id = board.getAttribute('data-id')
 
+const enhancer = compose(persistState('pomodoro'))
+
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   reducer,
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(sagaMiddleware),
+  enhancer
 )
 
 sagaMiddleware.run(rootSaga)

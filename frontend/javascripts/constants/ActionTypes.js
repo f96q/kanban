@@ -17,6 +17,8 @@ export const API_UPDATE_TASK = 'API_UPDATE_TASK'
 export const API_DESTROY_TASK = 'API_DESTROY_TASK'
 export const API_DROP_TASK = 'API_DROP_TASK'
 export const TOGGLE_DROP_DOWN_NAVI = 'TOGGLE_DROP_DOWN_NAVI'
+export const INCREMENT_POMODORO='INCREMENT_POMODORO'
+export const RESET_POMODORO='RESET_POMODORO'
 export const TASK_COLORS = [
   { name: 'green', value: 0 },
   { name: 'yellow', value: 1 },

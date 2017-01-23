@@ -81,3 +81,11 @@ export function dropTask(dragStartColumnId, id, columnId, index) {
 export function toggleDropDownNavi() {
   return { type: types.TOGGLE_DROP_DOWN_NAVI }
 }
+
+export function incrementPomodoro() {
+  return { type: types.INCREMENT_POMODORO }
+}
+
+export function resetPomodoro() {
+  return { type: types.RESET_POMODORO }
+}
