@@ -28,7 +28,8 @@ export default class Task extends Component {
   render() {
     return (
       <div className={this.style()} onClick={::this.edit} draggable="true" onDragStart={::this.onDragStart} onDragEnd={::this.onDragEnd}>
-        <div className="Task-title">{this.props.task.title}</div>
+        <span className="Task-point">{this.props.task.estimatedPoint}</span>
+        <span className="Task-title">{this.props.task.title}</span>
       </div>
     )
   }
