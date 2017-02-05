@@ -13,7 +13,7 @@ const csrfToken = document.getElementsByName('csrf-token').item(0).content
 const board = document.getElementsByClassName('js-board')[0]
 const id = board.getAttribute('data-id')
 
-const enhancer = compose(persistState('pomodoro'))
+const enhancer = compose(persistState('point'))
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(

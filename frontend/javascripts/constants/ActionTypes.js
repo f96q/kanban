@@ -17,8 +17,8 @@ export const API_UPDATE_TASK = 'API_UPDATE_TASK'
 export const API_DESTROY_TASK = 'API_DESTROY_TASK'
 export const API_DROP_TASK = 'API_DROP_TASK'
 export const TOGGLE_DROP_DOWN_NAVI = 'TOGGLE_DROP_DOWN_NAVI'
-export const INCREMENT_POMODORO='INCREMENT_POMODORO'
-export const RESET_POMODORO='RESET_POMODORO'
+export const INCREMENT_POINT='INCREMENT_POINT'
+export const RESET_POINT='RESET_POINT'
 export const TASK_COLORS = [
   { name: 'green', value: 0 },
   { name: 'yellow', value: 1 },
@@ -26,4 +26,4 @@ export const TASK_COLORS = [
   { name: 'red', value: 3 },
   { name: 'orange', value: 4 }
 ]
-export const MAX_POMODORO = 10
+export const MAX_POINT = 10

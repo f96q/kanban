@@ -11,7 +11,7 @@ json.board do
       json.extract! column, :id, :title
       json.tasks do
         json.array! column.tasks.order(position: :asc) do |task|
-          json.extract! task, :id, :title, :description, :color, :estimated_pomodoro, :pomodoro
+          json.extract! task, :id, :title, :description, :color, :estimated_point, :point
         end
       end
     end

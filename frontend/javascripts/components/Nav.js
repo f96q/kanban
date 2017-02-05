@@ -8,12 +8,12 @@ export default class Nav extends Component {
     this.props.actions.toggleDropDownNavi()
   }
 
-  onClickIncrementPomodoro() {
-    this.props.actions.incrementPomodoro()
+  onClickIncrementPoint() {
+    this.props.actions.incrementPoint()
   }
 
-  onClickResetPomodoro() {
-    this.props.actions.resetPomodoro()
+  onClickResetPoint() {
+    this.props.actions.resetPoint()
   }
 
   render() {
@@ -31,8 +31,8 @@ export default class Nav extends Component {
           </li>
           <li className="nav-item">
             <div className="btn-group">
-              <button className="btn btn-success" type="button" onClick={::this.onClickIncrementPomodoro}>Count</button>
-              <button className="btn btn-warning" type="button" onClick={::this.onClickResetPomodoro}>Reset</button>
+              <button className="btn btn-success" type="button" onClick={::this.onClickIncrementPoint}>Count</button>
+              <button className="btn btn-warning" type="button" onClick={::this.onClickResetPoint}>Reset</button>
             </div>
           </li>
           <li className="nav-item">

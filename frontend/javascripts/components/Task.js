@@ -19,7 +19,7 @@ export default class Task extends Component {
     let style = []
     style.push('Task')
     style.push(`Task--${color.name}`)
-    if (this.props.task.pomodoro > 0) {
+    if (this.props.task.point > 0) {
       style.push('Task--completion')
     }
     return style.join(' ')

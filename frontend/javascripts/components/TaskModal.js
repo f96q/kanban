@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
-import { TASK_COLORS, MAX_POMODORO } from '../constants/ActionTypes'
+import { TASK_COLORS, MAX_POINT } from '../constants/ActionTypes'
 
 export default class TaskModal extends Component {
   onChangeTitle(e) {
@@ -15,12 +15,12 @@ export default class TaskModal extends Component {
     this.props.actions.updateTaskModal('color', e.target.value)
   }
 
-  onChangeEstimatedPomodoro(e) {
-    this.props.actions.updateTaskModal('estimatedPomodoro', e.target.value)
+  onChangeEstimatedPoint(e) {
+    this.props.actions.updateTaskModal('estimatedPoint', e.target.value)
   }
 
-  onChangePomodoro(e) {
-    this.props.actions.updateTaskModal('pomodoro', e.target.value)
+  onChangePoint(e) {
+    this.props.actions.updateTaskModal('point', e.target.value)
   }
 
   destroy() {
@@ -35,8 +35,8 @@ export default class TaskModal extends Component {
       title: this.props.task.title,
       description: this.props.task.description,
       color: this.props.task.color,
-      estimatedPomodoro: parseInt(this.props.task.estimatedPomodoro),
-      pomodoro: parseInt(this.props.task.pomodoro)
+      estimatedPoint: parseInt(this.props.task.estimatedPoint),
+      point: parseInt(this.props.task.point)
     }
     if (this.props.task.id) {
       this.props.actions.updateTask(this.props.columnId, this.props.task.id, task)
@@ -62,7 +62,7 @@ export default class TaskModal extends Component {
     const colors = TASK_COLORS.map((color) => {
       return (<option key={color.name} value={color.value}>{color.name}</option>)
     })
-    const pomodoros = [...Array(MAX_POMODORO + 1)].map((_, value) => {
+    const points = [...Array(MAX_POINT + 1)].map((_, value) => {
       return (<option key={value} value={value}>{value}</option>)
     })
     return (
@@ -88,12 +88,12 @@ export default class TaskModal extends Component {
                <select className="form-control" onChange={::this.onChangeColor} value={this.props.task.color}>{colors}</select>
             </div>
             <div className="form-group">
-               <label className="form-control-label">Estimated Pomodoro:</label>
-               <select className="form-control" onChange={::this.onChangeEstimatedPomodoro} value={this.props.task.estimatedPomodoro}>{pomodoros}</select>
+               <label className="form-control-label">Estimated Point:</label>
+               <select className="form-control" onChange={::this.onChangeEstimatedPoint} value={this.props.task.estimatedPoint}>{points}</select>
             </div>
             <div className="form-group">
-               <label className="form-control-label">Pomodoro:</label>
-               <select className="form-control" onChange={::this.onChangePomodoro} value={this.props.task.pomodoro}>{pomodoros}</select>
+               <label className="form-control-label">Point:</label>
+               <select className="form-control" onChange={::this.onChangePoint} value={this.props.task.point}>{points}</select>
             </div>
           </div>
           <div className="modal-footer">

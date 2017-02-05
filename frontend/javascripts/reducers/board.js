@@ -11,15 +11,15 @@ function findIndex(objects, id) {
   return index
 }
 
-function calcPomodoro(column) {
-  let estimatedPomodoro = 0
-  let pomodoro = 0
+function calcPoint(column) {
+  let estimatedPoint = 0
+  let point = 0
   column.tasks.map((task) => {
-    estimatedPomodoro += task.estimatedPomodoro
-    pomodoro += task.pomodoro
+    estimatedPoint += task.estimatedPoint
+    point += task.point
   })
-  column.estimatedPomodoro = estimatedPomodoro
-  column.pomodoro = pomodoro
+  column.estimatedPoint = estimatedPoint
+  column.point = point
 }
 
 const initialState = {
@@ -32,8 +32,8 @@ const initialState = {
     title: '',
     columns: [],
     color: 0,
-    estimatedPomodoro: 0,
-    pomodoro: 0
+    estimatedPoint: 0,
+    point: 0
   },
   boards: [],
   taskModal: {
@@ -60,7 +60,7 @@ export default function board(state = initialState, action) {
     }
     case types.SET_BOARD: {
       let board = Object.assign({}, action.board)
-      board.columns.map(column => calcPomodoro(column))
+      board.columns.map(column => calcPoint(column))
       return Object.assign({}, state, { board: board, boards: action.boards })
     }
     case types.OPEN_NEW_TASK_MODAL: {
@@ -75,8 +75,8 @@ export default function board(state = initialState, action) {
           color: 0,
           title: '',
           description: '',
-          estimatedPomodoro: 0,
-          pomodoro: 0
+          estimatedPoint: 0,
+          point: 0
         }
       }
       return Object.assign({}, state, { taskModal: taskModal })
@@ -109,7 +109,7 @@ export default function board(state = initialState, action) {
       const index = findIndex(columns, action.columnId)
       const task = Object.assign({}, action.task, { id: action.id })
       columns[index].tasks.push(task)
-      calcPomodoro(columns[index])
+      calcPoint(columns[index])
       return Object.assign({}, state, { board: board })
     }
     case types.UPDATE_TASK: {
@@ -121,7 +121,7 @@ export default function board(state = initialState, action) {
       for (let key in action.task) {
         tasks[taskIndex][key] = action.task[key]
       }
-      calcPomodoro(columns[index])
+      calcPoint(columns[index])
       return Object.assign({}, state, { board: board } )
     }
     case types.DESTROY_TASK: {
@@ -131,7 +131,7 @@ export default function board(state = initialState, action) {
       const tasks = columns[index].tasks
       const taskIndex = findIndex(tasks, action.id)
       tasks.splice(taskIndex, 1)
-      calcPomodoro(columns[index])
+      calcPoint(columns[index])
       return Object.assign({}, state, { board: board })
     }
     case types.DRAG_START_TASK: {
@@ -152,8 +152,8 @@ export default function board(state = initialState, action) {
       tasks.splice(taskIndex, 1)
       dropTasks.splice(action.index, 0, task)
       if (action.dragStartColumnId != action.columnId) {
-        calcPomodoro(columns[index])
-        calcPomodoro(columns[dropIndex])
+        calcPoint(columns[index])
+        calcPoint(columns[dropIndex])
       }
       return Object.assign({}, state, { board: board })
     }
