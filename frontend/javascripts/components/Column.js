@@ -28,11 +28,6 @@ export default class Column extends Component {
     this.props.actions.dropTask(this.props.dragStartColumnId, this.props.dragStartId, this.props.column.id, index)
   }
 
-  title() {
-    const point = `${this.props.column.point}/${this.props.column.estimatedPoint}`
-    return `${this.props.column.title} (${point})`
-  }
-
   render() {
     const tasks = this.props.column.tasks.map((task) => {
       return (
@@ -42,7 +37,7 @@ export default class Column extends Component {
     tasks.push((<div className="Column-dropzone" key={`dropzone-${this.props.column.id}`}></div>))
     return (
       <div className="Column">
-        <div className="Column-title" onClick={::this.addTask}>{this.title()}</div>
+        <div className="Column-title" onClick={::this.addTask}>{this.props.column.title}</div>
         <div className="Column-tasks" onDragOver={::this.onDragOver} onDrop={::this.onDrop}>{tasks}</div>
       </div>
     )
