@@ -26,9 +26,10 @@ export default class Task extends Component {
   }
 
   render() {
+    const point = this.props.task.estimatedPoint == 0 ? null : <span className="Task-point">{this.props.task.estimatedPoint}</span>
     return (
       <div className={this.style()} onClick={::this.edit} draggable="true" onDragStart={::this.onDragStart} onDragEnd={::this.onDragEnd}>
-        <span className="Task-point">{this.props.task.estimatedPoint}</span>
+        {point}
         <span className="Task-title">{this.props.task.title}</span>
       </div>
     )
