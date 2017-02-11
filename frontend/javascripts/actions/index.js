@@ -1,91 +1,130 @@
 import * as types from '../constants/ActionTypes'
+import humps from 'humps'
+import 'whatwg-fetch'
 
-export function getBoard() {
-  return { type: types.API_GET_BOARD }
-}
-
-export function openNewTaskModal(columnId) {
-  return {
-    type: types.OPEN_NEW_TASK_MODAL,
-    columnId: columnId
+export default class ActionDispatcher {
+  constructor(state, dispatch) {
+    this.state = state
+    this.dispatch = dispatch
   }
-}
 
-export function openEditTaskModal(columnId, id) {
-  return {
-    type: types.OPEN_EDIT_TASK_MODAL,
-    columnId: columnId,
-    id: id
+  openNewTaskModal(columnId) {
+    this.dispatch({
+      type: types.OPEN_NEW_TASK_MODAL,
+      columnId: columnId
+    })
   }
-}
 
-export function closeTaskModal() {
-  return { type: types.CLOSE_TASK_MODAL }
-}
-
-export function updateTaskModal(key, value) {
-  return {
-    type: types.UPDATE_TASK_MODAL,
-    key: key,
-    value: value
+  openEditTaskModal(columnId, id) {
+    this.dispatch({
+      type: types.OPEN_EDIT_TASK_MODAL,
+      columnId: columnId,
+      id: id
+    })
   }
-}
 
-export function createTask(columnId, task) {
-  return {
-    type: types.API_CREATE_TASK,
-    columnId: columnId,
-    task: task
+  closeTaskModal() {
+    this.dispatch({ type: types.CLOSE_TASK_MODAL })
   }
-}
 
-export function updateTask(columnId, id, task) {
-  return {
-    type: types.API_UPDATE_TASK,
-    columnId: columnId,
-    id: id,
-    task: task
+  updateTaskModal(key, value) {
+    this.dispatch({
+      type: types.UPDATE_TASK_MODAL,
+      key: key,
+      value: value
+    })
   }
-}
 
-export function destroyTask(columnId, id) {
-  return {
-    type: types.API_DESTROY_TASK,
-    columnId: columnId,
-    id: id
+  async getBoard() {
+    const id = this.state.board.id
+    await fetch(`/api/boards/${id}`, { credentials: 'same-origin' })
+      .then(response => response.json())
+      .then(json => ::this.dispatch({ type: types.SET_BOARD, board: json.board, boards: json.boards }))
   }
-}
 
-export function dragStartTask(columnId, id) {
-  return {
-    type: types.DRAG_START_TASK,
-    columnId: columnId,
-    id: id
+  async createTask(columnId, task) {
+    const data = new FormData()
+    data.append('column_id', columnId)
+    const decamelizeTask = humps.decamelizeKeys(task)
+    for (let key in decamelizeTask) {
+      data.append(`task[${key}]`, decamelizeTask[key])
+    }
+    const init = {
+      headers: { 'X-CSRF-Token': this.state.csrfToken },
+      credentials: 'same-origin',
+      method: 'POST',
+      body: data
+    }
+    await fetch('/api/tasks', init)
+      .then(response => response.json())
+      .then(json => ::this.dispatch({ type: types.CREATE_TASK, columnId: columnId, id: json.id, task: task }))
   }
-}
 
-export function dragEndTask() {
-  return { type: types.DRAG_END_TASK }
-}
-
-export function dropTask(dragStartColumnId, id, columnId, index) {
-  return {
-    type: types.API_DROP_TASK,
-    dragStartColumnId: dragStartColumnId,
-    id: id,
-    columnId: columnId,
-    index: index
+  async updateTask(columnId, id, task) {
+    const data = new FormData()
+    const decamelizeTask = humps.decamelizeKeys(task)
+    for (let key in decamelizeTask) {
+      data.append(`task[${key}]`, decamelizeTask[key])
+    }
+    const init = {
+      headers: { 'X-CSRF-Token': this.state.csrfToken },
+      credentials: 'same-origin',
+      method: 'PUT',
+      body: data
+    }
+    await fetch(`/api/tasks/${id}`, init)
+      .then(() => ::this.dispatch({ type: types.UPDATE_TASK, columnId: columnId, id: id, task: task }))
   }
-}
 
-export function toggleDropDownNavi() {
-  return { type: types.TOGGLE_DROP_DOWN_NAVI }
-}
+  async destroyTask(columnId, id) {
+    const init = {
+      headers: { 'X-CSRF-Token': this.state.csrfToken },
+      credentials: 'same-origin',
+      method: 'DELETE'
+    }
+    await fetch(`/api/tasks/${id}`, init)
+      .then(() => {
+        ::this.dispatch({ type: types.DESTROY_TASK, columnId: columnId, id: id })
+        ::this.dispatch({ type: types.CLOSE_TASK_MODAL })
+      })
+  }
 
-export function incrementPoint() {
-  return { type: types.INCREMENT_POINT }
-}
+  dragStartTask(columnId, id) {
+    this.dispatch({
+      type: types.DRAG_START_TASK,
+      columnId: columnId,
+      id: id
+    })
+  }
 
-export function resetPoint() {
-  return { type: types.RESET_POINT }
+  dragEndTask() {
+    this.dispatch({ type: types.DRAG_END_TASK })
+  }
+
+  async dropTask(dragStartColumnId, id, columnId, index) {
+    const data = new FormData()
+    data.append('id', id)
+    data.append('column_id', columnId)
+    data.append('position', index)
+    const init = {
+      headers: { 'X-CSRF-Token': this.state.csrfToken },
+      credentials: 'same-origin',
+      method: 'PUT',
+      body: data
+    }
+    await fetch(`/api/tasks/${id}/position`, init)
+      .then(() => ::this.dispatch({ type: types.DROP_TASK, dragStartColumnId: dragStartColumnId, id: id, columnId: columnId, index: index }))
+  }
+
+  toggleDropDownNavi() {
+    this.dispatch({ type: types.TOGGLE_DROP_DOWN_NAVI })
+  }
+
+  incrementPoint() {
+    this.dispatch({ type: types.INCREMENT_POINT })
+  }
+
+  resetPoint() {
+    this.dispatch({ type: types.RESET_POINT })
+  }
 }

@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import Nav from '../components/Nav'
 import Board from '../components/Board'
 import TaskModal from '../components/TaskModal'
-import { getDragStartColumnId, getDragStartId, getTaskModal, getBoard, getBoards, getOpenDropDownNavi, getCounter } from '../reducers'
-import * as BoardActions from '../actions'
+import { getDragStartColumnId, getDragStartId, getCsrfToken, getTaskModal, getBoard, getBoards, getOpenDropDownNavi, getCounter } from '../reducers'
+import ActionDispatcher from '../actions'
 
 class App extends Component {
   render() {
@@ -28,6 +27,7 @@ function mapStateToProps(state) {
   return {
     dragStartColumnId: getDragStartColumnId(state),
     dragStartId: getDragStartId(state),
+    csrfToken: getCsrfToken(state),
     taskModal: getTaskModal(state),
     board: getBoard(state),
     boards: getBoards(state),
@@ -37,11 +37,12 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(BoardActions, dispatch) }
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  return Object.assign({}, ownProps, stateProps, { actions: new ActionDispatcher(stateProps, dispatchProps.dispatch) })
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null,
+  mergeProps
 )(App)

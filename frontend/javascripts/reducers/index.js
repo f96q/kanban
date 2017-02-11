@@ -15,6 +15,10 @@ export function getDragStartId(state) {
   return state.board.dragStartId
 }
 
+export function getCsrfToken(state) {
+  return state.board.csrfToken
+}
+
 export function getTaskModal(state) {
   return state.board.taskModal
 }
