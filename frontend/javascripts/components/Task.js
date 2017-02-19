@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TASK_COLORS } from '../constants/ActionTypes'
+import { TASK_COLORS } from '../constants'
 
 export default class Task extends Component {
   edit() {

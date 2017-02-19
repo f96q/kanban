@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
-import { TASK_COLORS, MAX_POINT } from '../constants/ActionTypes'
+import { TASK_COLORS, MAX_POINT } from '../constants'
 
 export default class TaskModal extends Component {
   onChangeTitle(e) {

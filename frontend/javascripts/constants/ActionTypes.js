@@ -14,11 +14,3 @@ export const DROP_TASK = 'DROP_TASK'
 export const TOGGLE_DROP_DOWN_NAVI = 'TOGGLE_DROP_DOWN_NAVI'
 export const INCREMENT_POINT='INCREMENT_POINT'
 export const RESET_POINT='RESET_POINT'
-export const TASK_COLORS = [
-  { name: 'green', value: 0 },
-  { name: 'yellow', value: 1 },
-  { name: 'blue', value: 2 },
-  { name: 'red', value: 3 },
-  { name: 'orange', value: 4 }
-]
-export const MAX_POINT = 10
