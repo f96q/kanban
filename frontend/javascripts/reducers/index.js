@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
 import board from './board'
-import point from './point'
 
 export default combineReducers({
-  board,
-  point
+  board
 })
 
 export function getDragStartColumnId(state) {
@@ -33,8 +31,4 @@ export function getBoards(state) {
 
 export function getOpenDropDownNavi(state) {
   return state.board.openDropDownNavi
-}
-
-export function getCounter(state) {
-  return state.point.counter
 }

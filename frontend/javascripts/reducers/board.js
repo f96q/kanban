@@ -11,17 +11,6 @@ function findIndex(objects, id) {
   return index
 }
 
-function calcPoint(column) {
-  let estimatedPoint = 0
-  let point = 0
-  column.tasks.map((task) => {
-    estimatedPoint += task.estimatedPoint
-    point += task.point
-  })
-  column.estimatedPoint = estimatedPoint
-  column.point = point
-}
-
 const initialState = {
   dragStartColumnId: null,
   dragStartId: null,
@@ -60,7 +49,6 @@ export default function board(state = initialState, action) {
     }
     case types.SET_BOARD: {
       let board = Object.assign({}, action.board)
-      board.columns.map(column => calcPoint(column))
       return Object.assign({}, state, { board: board, boards: action.boards })
     }
     case types.OPEN_NEW_TASK_MODAL: {
@@ -109,7 +97,6 @@ export default function board(state = initialState, action) {
       const index = findIndex(columns, action.columnId)
       const task = Object.assign({}, action.task, { id: action.id })
       columns[index].tasks.push(task)
-      calcPoint(columns[index])
       return Object.assign({}, state, { board: board })
     }
     case types.UPDATE_TASK: {
@@ -121,7 +108,6 @@ export default function board(state = initialState, action) {
       for (let key in action.task) {
         tasks[taskIndex][key] = action.task[key]
       }
-      calcPoint(columns[index])
       return Object.assign({}, state, { board: board } )
     }
     case types.DESTROY_TASK: {
@@ -131,7 +117,6 @@ export default function board(state = initialState, action) {
       const tasks = columns[index].tasks
       const taskIndex = findIndex(tasks, action.id)
       tasks.splice(taskIndex, 1)
-      calcPoint(columns[index])
       return Object.assign({}, state, { board: board })
     }
     case types.DRAG_START_TASK: {
@@ -151,10 +136,6 @@ export default function board(state = initialState, action) {
       const dropTasks = columns[dropIndex].tasks
       tasks.splice(taskIndex, 1)
       dropTasks.splice(action.index, 0, task)
-      if (action.dragStartColumnId != action.columnId) {
-        calcPoint(columns[index])
-        calcPoint(columns[dropIndex])
-      }
       return Object.assign({}, state, { board: board })
     }
     case types.TOGGLE_DROP_DOWN_NAVI: {

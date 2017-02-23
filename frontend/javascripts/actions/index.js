@@ -119,12 +119,4 @@ export default class ActionDispatcher {
   toggleDropDownNavi() {
     this.dispatch({ type: types.TOGGLE_DROP_DOWN_NAVI })
   }
-
-  incrementPoint() {
-    this.dispatch({ type: types.INCREMENT_POINT })
-  }
-
-  resetPoint() {
-    this.dispatch({ type: types.RESET_POINT })
-  }
 }

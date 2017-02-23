@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import Nav from '../components/Nav'
 import Board from '../components/Board'
 import TaskModal from '../components/TaskModal'
-import { getDragStartColumnId, getDragStartId, getCsrfToken, getTaskModal, getBoard, getBoards, getOpenDropDownNavi, getCounter } from '../reducers'
+import { getDragStartColumnId, getDragStartId, getCsrfToken, getTaskModal, getBoard, getBoards, getOpenDropDownNavi } from '../reducers'
 import ActionDispatcher from '../actions'
 
 class App extends Component {
   render() {
-    const { dragStartColumnId, dragStartId, taskModal, board, boards, openDropDownNavi, counter, actions } = this.props
+    const { dragStartColumnId, dragStartId, taskModal, board, boards, openDropDownNavi, actions } = this.props
     return (
       <div>
-        <Nav board={board} boards={boards} openDropDownNavi={openDropDownNavi} counter={counter} actions={actions} />
+        <Nav board={board} boards={boards} openDropDownNavi={openDropDownNavi} actions={actions} />
         <Board dragStartColumnId={dragStartColumnId} dragStartId={dragStartId} board={board} actions={actions} />
         <TaskModal title={taskModal.title}
                    isOpen={taskModal.isOpen}
@@ -32,7 +32,6 @@ function mapStateToProps(state) {
     board: getBoard(state),
     boards: getBoards(state),
     openDropDownNavi: getOpenDropDownNavi(state),
-    counter: getCounter(state),
     actions: state.actions
   }
 }
