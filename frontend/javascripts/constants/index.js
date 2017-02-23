@@ -5,4 +5,3 @@ export const TASK_COLORS = [
   { name: 'red', value: 3 },
   { name: 'orange', value: 4 }
 ]
-export const MAX_POINT = 10

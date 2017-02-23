@@ -14,22 +14,13 @@ export default class Task extends Component {
     this.props.actions.dragEndTask()
   }
 
-  style() {
-    const color = TASK_COLORS.find(color => color.value == this.props.task.color)
-    let style = []
-    style.push('Task')
-    style.push(`Task--${color.name}`)
-    if (this.props.task.point > 0) {
-      style.push('Task--completion')
-    }
-    return style.join(' ')
+  color() {
+    return TASK_COLORS.find(color => color.value == this.props.task.color).name
   }
 
   render() {
-    const point = this.props.task.estimatedPoint == 0 ? null : <span className="Task-point">{this.props.task.estimatedPoint}</span>
     return (
-      <div className={this.style()} onClick={::this.edit} draggable="true" onDragStart={::this.onDragStart} onDragEnd={::this.onDragEnd}>
-        {point}
+      <div className={`Task Task--${this.color()}`} onClick={::this.edit} draggable="true" onDragStart={::this.onDragStart} onDragEnd={::this.onDragEnd}>
         <span className="Task-title">{this.props.task.title}</span>
       </div>
     )
