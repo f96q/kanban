@@ -12,41 +12,41 @@
 
 ActiveRecord::Schema.define(version: 20170223140500) do
 
-  create_table "boards", force: :cascade do |t|
+  create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "columns", force: :cascade do |t|
+  create_table "columns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",      null: false
     t.integer  "board_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id"], name: "index_columns_on_board_id"
+    t.index ["board_id"], name: "index_columns_on_board_id", using: :btree
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string   "title",                   null: false
-    t.text     "description"
+  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title",                                 null: false
+    t.text     "description", limit: 65535
     t.integer  "position"
-    t.integer  "column_id",               null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "color",       default: 0, null: false
-    t.index ["column_id"], name: "index_tasks_on_column_id"
+    t.integer  "column_id",                             null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "color",                     default: 0, null: false
+    t.index ["column_id"], name: "index_tasks_on_column_id", using: :btree
   end
 
-  create_table "user_boards", force: :cascade do |t|
+  create_table "user_boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",    null: false
     t.integer  "board_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id"], name: "index_user_boards_on_board_id"
-    t.index ["user_id"], name: "index_user_boards_on_user_id"
+    t.index ["board_id"], name: "index_user_boards_on_board_id", using: :btree
+    t.index ["user_id"], name: "index_user_boards_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -59,8 +59,12 @@ ActiveRecord::Schema.define(version: 20170223140500) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "columns", "boards"
+  add_foreign_key "tasks", "columns"
+  add_foreign_key "user_boards", "boards"
+  add_foreign_key "user_boards", "users"
 end

@@ -5,7 +5,7 @@ class CreateUserBoards < ActiveRecord::Migration[5.0]
       t.references :board, null: false
       t.timestamps
     end
-    add_foreign_key :users_boards, :users, column: :user_id
-    add_foreign_key :users_boards, :boards, column: :board_id
+    add_foreign_key :user_boards, :users, column: :user_id
+    add_foreign_key :user_boards, :boards, column: :board_id
   end
 end
