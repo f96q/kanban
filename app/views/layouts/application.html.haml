@@ -6,4 +6,10 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
   %body
+    %nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
+      %ul.nav.navbar-nav.float-sm-right
+        %li.nav-item
+          = link_to 'Settings', boards_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'LogOut', destroy_user_session_path, method: :delete, class: 'nav-link'
     = yield

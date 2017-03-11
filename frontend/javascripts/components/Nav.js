@@ -20,9 +20,14 @@ export default class Nav extends Component {
           <li className={`nav-item dropdown show ${open}`} onClick={::this.onClickDropDown}>
             <span className={`nav-link active ${dropdownToggle}`}>{this.props.board.title}</span>
             <div className="dropdown-menu">{boards}</div>
+            </li>
+        </ul>
+        <ul className="nav navbar-nav float-sm-right">
+          <li className="nav-item">
+            <a className="nav-link" href="/boards">Settings</a>
           </li>
-          <li className="nav-item float-sm-right">
-            <a className="nav-link" href="/users/sign_out">LogOut</a>
+          <li className="nav-item">
+            <a className="nav-link" href="/users/sign_out" data-method="delete">LogOut</a>
           </li>
         </ul>
       </nav>
