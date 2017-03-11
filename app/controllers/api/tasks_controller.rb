@@ -36,12 +36,12 @@ class Api::TasksController < Api::ApplicationController
   private
 
   def set_column
-    @column = Column.includes(board: [:user_boards]).find_by(board: { user_boards: { user_id: current_user.id } }, id: params[:column_id])
+    @column = Column.includes(board: [:users_boards]).find_by(board: { users_boards: { user_id: current_user.id } }, id: params[:column_id])
     head :not_found unless @column
   end
 
   def set_task
-    @task = Task.includes(column: {board: [:user_boards]}).find_by(column: { board: { user_boards: { user_id: current_user.id } } }, id: params[:id])
+    @task = Task.includes(column: {board: [:users_boards]}).find_by(column: { board: { users_boards: { user_id: current_user.id } } }, id: params[:id])
     head :not_found unless @task
   end
 

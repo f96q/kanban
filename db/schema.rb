@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223140500) do
+ActiveRecord::Schema.define(version: 20170311021638) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",      null: false
@@ -37,15 +37,6 @@ ActiveRecord::Schema.define(version: 20170223140500) do
     t.index ["column_id"], name: "index_tasks_on_column_id", using: :btree
   end
 
-  create_table "user_boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "board_id",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["board_id"], name: "index_user_boards_on_board_id", using: :btree
-    t.index ["user_id"], name: "index_user_boards_on_user_id", using: :btree
-  end
-
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -63,8 +54,18 @@ ActiveRecord::Schema.define(version: 20170223140500) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "users_boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "board_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_users_boards_on_board_id", using: :btree
+    t.index ["user_id", "board_id"], name: "index_users_boards_on_user_id_and_board_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_users_boards_on_user_id", using: :btree
+  end
+
   add_foreign_key "columns", "boards"
   add_foreign_key "tasks", "columns"
-  add_foreign_key "user_boards", "boards"
-  add_foreign_key "user_boards", "users"
+  add_foreign_key "users_boards", "boards"
+  add_foreign_key "users_boards", "users"
 end

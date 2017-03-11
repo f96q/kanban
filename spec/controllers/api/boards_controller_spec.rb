@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::BoardsController, type: :controller do
   let(:user) { create(:user) }
   let(:board) { create(:board) }
-  let!(:user_board) { create(:user_board, user: user, board: board) }
+  let!(:users_board) { create(:users_board, user: user, board: board) }
 
   before do
     sign_in(user)

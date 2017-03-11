@@ -9,7 +9,7 @@ RSpec.describe BoardsController, type: :controller do
 
   describe '#index' do
     let(:board) { create(:board) }
-    let!(:user_board) { create(:user_board, user: user, board: board) }
+    let!(:users_board) { create(:users_board, user: user, board: board) }
     let(:action) { process :index, method: :get }
 
     it 'should success' do
@@ -45,7 +45,7 @@ RSpec.describe BoardsController, type: :controller do
 
   describe '#update' do
     let(:board) { create(:board) }
-    let!(:user_board) { create(:user_board, user: user, board: board) }
+    let!(:users_board) { create(:users_board, user: user, board: board) }
     let(:params) do
       {
         id: board.id,
@@ -71,7 +71,7 @@ RSpec.describe BoardsController, type: :controller do
 
   describe '#destroy' do
     let(:board) { create(:board) }
-    let!(:user_board) { create(:user_board, user: user, board: board) }
+    let!(:users_board) { create(:users_board, user: user, board: board) }
     let(:params) do
       {
         id: board.id

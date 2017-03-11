@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   before_action :set_board, only: [:update, :edit, :destroy]
 
   def index
-    @boards = Board.includes(:user_boards).where(user_boards: {user_id: current_user.id}).order(updated_at: :desc)
+    @boards = Board.includes(:users_boards).where(users_boards: {user_id: current_user.id}).order(updated_at: :desc)
   end
 
   def new
@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
-    @board.user_boards.build(user: current_user)
+    @board.users_boards.build(user: current_user)
     if @board.save
       redirect_to edit_board_path(@board), flash: {success: 'Updated'}
     else
