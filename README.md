@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Example
 
-Things you may want to cover:
+### Mac OS X + Passenger + Apache
 
-* Ruby version
+/private/etc/apache2/other/kanban.conf
 
-* System dependencies
+...
+LoadModule passenger_module /usr/local/opt/passenger/libexec/buildout/apache2/mod_passenger.so
+<IfModule mod_passenger.c>
+  PassengerRoot /usr/local/opt/passenger/libexec/src/ruby_supportlib/phusion_passenger/locations.ini
+  PassengerDefaultRuby /usr/local/bin/ruby
+</IfModule>
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<VirtualHost *>
+  RailsEnv production
+  DocumentRoot /Users/user/kanban/public
+  <Directory /Users/user/kanban/public>
+    Require all granted
+  </Directory>
+</VirtualHost>
+...
